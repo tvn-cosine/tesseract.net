@@ -20,25 +20,6 @@ namespace Tesseract
 
         internal readonly HandleRef handleRef;
 
-        private Pix localPix;
-
-        internal Pix LocalPix
-        {
-            get
-            {
-                return localPix;
-            }
-            set
-            {
-                if (localPix != null)
-                {
-                    localPix.Dispose();
-                }
-
-                localPix = value;
-            }
-        }
-
         #region Ctors
 
         private TessBaseAPI()
@@ -71,51 +52,6 @@ namespace Tesseract
         }
 
         #endregion Ctors
-
-        public void DisposeImage()
-        {
-            if (LocalPix != null)
-            {
-                LocalPix.Dispose();
-            }
-            Clear();
-            ClearPersistentCache();
-            ClearAdaptiveClassifier();
-        }
-
-        public ResultIterator Process(string inputFile, bool createPdf = false)
-        {
-            SetPageSegMode(PageSegmentationMode.AUTO);
-            SetInputImage(inputFile);
-            Recognize();
-
-            //if create pdf export pdf
-            if (createPdf)
-            {
-                //ensure input name is set
-                SetInputName(inputFile);
-
-                var fileInfo = new System.IO.FileInfo(inputFile);
-                string tessDataPath = string.Format("{0}", dataPath);
-                string outputName = fileInfo.FullName.Replace(fileInfo.Extension, string.Empty); //input name.pdf
-
-                // ensure the data directory exist
-                if (!System.IO.Directory.Exists(tessDataPath))
-                {
-                    throw new System.IO.DirectoryNotFoundException("tessData Path does not exist");
-                }
-
-                // call pdf renderer and export pdf
-                using (var pdfRenderer = new PdfRenderer(outputName, tessDataPath, false))
-                {
-                    pdfRenderer.BeginDocument("Newsclip Searchable PDF Generation");
-                    pdfRenderer.AddImage(this);
-                    pdfRenderer.EndDocument();
-                }
-            }
-
-            return GetIterator();
-        }
 
         #region Tesseract Methods
 
@@ -192,44 +128,38 @@ namespace Tesseract
             Clear();
             ClearPersistentCache();
             ClearAdaptiveClassifier();
-            if (LocalPix != null)
-            {
-                LocalPix.Dispose();
-            }
-             
-            Native.DllImports.TessBaseAPISetImage(handleRef, imagedata, width, height, bytes_per_pixel, bytes_per_line); 
+
+            Native.DllImports.TessBaseAPISetImage(handleRef, imagedata, width, height, bytes_per_pixel, bytes_per_line);
         }
 
         /// <summary>
         /// Takes ownership of the input pix.
         /// </summary>
-        public void SetInputImage(Pix value)
+        public void SetImage(Pix value)
         {
             Clear();
             ClearPersistentCache();
             ClearAdaptiveClassifier();
-            if (LocalPix != null)
-            {
-                LocalPix.Dispose();
-            }
 
-            LocalPix = value;
             Native.DllImports.TessBaseAPISetImage2(handleRef, (HandleRef)value);
         }
 
         /// <summary>
         /// Takes ownership of the input pix.
         /// </summary>
-        public void SetInputImage(string inputFile)
+        public Pix SetImage(string inputFile)
         {
             //ensure the file exist
             if (!System.IO.File.Exists(inputFile))
             {
-                throw new System.IO.FileNotFoundException("File does not exist");
+                throw new System.IO.FileNotFoundException(string.Format("File {0} does not exist", inputFile));
             }
 
             //set the input image
-            SetInputImage(Pix.Read(inputFile));
+            Pix obj = Pix.Read(inputFile);
+            SetImage(obj);
+
+            return obj;
         }
 
         /// <summary>
@@ -381,8 +311,10 @@ namespace Tesseract
         public bool Init(string dataPath, string language, OcrEngineMode tessOcrEngineMode, string[] configs)
         {
             int configsSize = 0;
-            if (configs != null)
+            if (null != configs)
+            {
                 configsSize = configs.Length;
+            }
 
             return Native.DllImports.TessBaseAPIInit1(handleRef, dataPath, language, tessOcrEngineMode, configs, configsSize) == 0;
         }
@@ -518,16 +450,22 @@ namespace Tesseract
             string[] configs, string[] varsVec, string[] varsValues, bool setOnlyNonDebugParams = false)
         {
             int configsSize = 0;
-            if (configs != null)
+            if (null != configs)
+            {
                 configsSize = configs.Length;
+            }
 
             UIntPtr varsVecSize = new UIntPtr(0);
-            if (varsVec != null)
+            if (null != varsVec)
+            {
                 varsVecSize = new UIntPtr((uint)varsVec.Length);
+            }
 
             UIntPtr varsValuesSize = new UIntPtr(0);
-            if (varsValues != null)
+            if (null != varsValues)
+            {
                 varsValuesSize = new UIntPtr((uint)varsValues.Length);
+            }
 
             return Native.DllImports.TessBaseAPIInit4(handleRef, dataPath, language, tessOcrEngineMode,
                 configs, configsSize, varsVec, varsValues, varsVecSize, setOnlyNonDebugParams ? 1 : 0) == 0;
@@ -649,7 +587,9 @@ namespace Tesseract
                 pixa = new Pixa(pixaPnt);
             }
             else
+            {
                 pixa = null;
+            }
 
             if (IntPtr.Zero != pointer)
             {
@@ -669,7 +609,9 @@ namespace Tesseract
                 pixa = new Pixa(pixaPnt);
             }
             else
+            {
                 pixa = null;
+            }
 
             if (IntPtr.Zero != pointer)
             {
@@ -689,7 +631,9 @@ namespace Tesseract
                 pixa = new Pixa(pixaPntr);
             }
             else
+            {
                 pixa = null;
+            }
 
             if (IntPtr.Zero != pointer)
             {
@@ -709,7 +653,9 @@ namespace Tesseract
                 pixa = new Pixa(pixaPntr);
             }
             else
+            {
                 pixa = null;
+            }
 
             if (IntPtr.Zero != pointer)
             {
@@ -729,7 +675,9 @@ namespace Tesseract
                 pixa = new Pixa(pixaPntr);
             }
             else
+            {
                 pixa = null;
+            }
 
             if (IntPtr.Zero != pointer)
             {
@@ -1078,24 +1026,48 @@ namespace Tesseract
             Native.DllImports.TessBaseAPISetMinOrientationMargin(handleRef, margin);
         }
 
+
         #endregion Tesseract Methods
 
         #region IDisposable Support
 
+        private bool disposedValue = false; // To detect redundant calls
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    // TODO: dispose managed state (managed objects).
+                }
+
+                if (handleRef.Handle != null && handleRef.Handle != IntPtr.Zero)
+                {
+                    Clear();
+                    ClearAdaptiveClassifier();
+                    End();
+                    ClearPersistentCache();
+                    Native.DllImports.TessBaseAPIDelete(handleRef);
+                }
+
+                disposedValue = true;
+            }
+        }
+
+        // override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
+        ~TessBaseAPI()
+        {
+            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+            Dispose(false);
+        }
+
+        // This code added to correctly implement the disposable pattern.
         public void Dispose()
         {
-            if (handleRef.Handle != null && handleRef.Handle != IntPtr.Zero)
-            {
-                if (localPix != null)
-                {
-                    localPix.Dispose();
-                }
-                Clear();
-                ClearAdaptiveClassifier();
-                End();
-                ClearPersistentCache();
-                Native.DllImports.TessBaseAPIDelete(handleRef);
-            }
+            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
         #endregion IDisposable Support

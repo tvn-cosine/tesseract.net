@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="BoxTextRenderer.cs" />
     <Compile Include="ChoiceIterator.cs" />
+    <Compile Include="Extensions\TessBaseApiExtensions.cs" />
     <Compile Include="MutableIterator.cs" />
     <Compile Include="Native\Architecture.cs" />
     <Compile Include="Native\DllImports.cs" />
