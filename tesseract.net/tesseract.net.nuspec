@@ -1,0 +1,25 @@
+﻿<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>tesseract.net</id>
+    <title>tesseract.net</title>
+    <version>$version$</version>
+    <authors>tvn-cosine</authors>
+    <owners>tvn-cosine</owners>
+    <licenseUrl>https://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
+    <projectUrl>https://github.com/tvn-cosine/tvn-cosine/wiki/Tesseract-.net-Api</projectUrl> 
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>a .net wrapper for Tesseract Ocr.</description>
+    <summary>a .net wrapper for Tesseract Ocr.</summary>
+    <releaseNotes>added the SetImage method to allow OpenCV mat data pointers.</releaseNotes>
+    <copyright>Copyright © tvn-cosine 2018</copyright>
+    <tags>dotNet OCR tesseract</tags>
+    <dependencies> 
+		<dependency id="leptonica.net" version="1.74.4.14" /> 
+	</dependencies>
+  </metadata>
+  <files>
+    <file src="lib\x86\pvt.cppan.demo.google.tesseract.libtesseract400.dll" target="lib\x86\" />
+    <file src="lib\x64\pvt.cppan.demo.google.tesseract.libtesseract400.dll" target="lib\x64\" />
+  </files>
+</package>
