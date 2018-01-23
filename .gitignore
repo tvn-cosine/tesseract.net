@@ -3,3 +3,27 @@
 ################################################################################
 
 /.vs
+/packages/leptonica.net.1.74.4.14/content/lib/x64/pvt.cppan.demo.xz_utils.lzma-5.2.3.dll
+/packages/leptonica.net.1.74.4.14/content/lib/x64/pvt.cppan.demo.webp-0.6.0.dll
+/packages/leptonica.net.1.74.4.14/content/lib/x64/pvt.cppan.demo.tiff-4.0.7.dll
+/packages/leptonica.net.1.74.4.14/content/lib/x64/pvt.cppan.demo.png-1.6.30.dll
+/packages/leptonica.net.1.74.4.14/content/lib/x64/pvt.cppan.demo.openjpeg.openjp2-2.1.2.dll
+/packages/leptonica.net.1.74.4.14/content/lib/x64/pvt.cppan.demo.madler.zlib-1.2.11.dll
+/packages/leptonica.net.1.74.4.14/content/lib/x64/pvt.cppan.demo.jpeg-9.2.0.dll
+/packages/leptonica.net.1.74.4.14/content/lib/x64/pvt.cppan.demo.danbloomberg.leptonica-1.74.4.dll
+/packages/leptonica.net.1.74.4.14/content/lib/x86/pvt.cppan.demo.xz_utils.lzma-5.2.3.dll
+/packages/leptonica.net.1.74.4.14/content/lib/x86/pvt.cppan.demo.webp-0.6.0.dll
+/packages/leptonica.net.1.74.4.14/content/lib/x86/pvt.cppan.demo.tiff-4.0.7.dll
+/packages/leptonica.net.1.74.4.14/content/lib/x86/pvt.cppan.demo.png-1.6.30.dll
+/packages/leptonica.net.1.74.4.14/content/lib/x86/pvt.cppan.demo.openjpeg.openjp2-2.1.2.dll
+/packages/leptonica.net.1.74.4.14/content/lib/x86/pvt.cppan.demo.madler.zlib-1.2.11.dll
+/packages/leptonica.net.1.74.4.14/content/lib/x86/pvt.cppan.demo.jpeg-9.2.0.dll
+/packages/leptonica.net.1.74.4.14/content/lib/x86/pvt.cppan.demo.danbloomberg.leptonica-1.74.4.dll
+/packages
+/tesseract.net/bin/Debug
+/tesseract.net/obj
+/tesseract.net.console/bin/Debug
+/tesseract.net.console/obj/Debug
+/tesseract.net.test/bin/Debug
+/tesseract.net.test/obj/Debug
+/tesseract.net.console/obj/Release
