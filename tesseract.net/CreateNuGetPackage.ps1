@@ -4,7 +4,7 @@ $projectName = "tesseract.net"
 $GitExe = "C:\Program Files\Git\bin\git.exe"
 $sourceNugetExe = "https://dist.nuget.org/win-x86-commandline/latest/nuget.exe" 
 $localDirectory = "C:\csource\"
-$GitHttpsUrl = "https://github.com/tvn-cosine/leptonica.net"
+$GitHttpsUrl = "https://github.com/tvn-cosine/tesseract.net"
  
 
  
