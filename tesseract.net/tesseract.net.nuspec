@@ -7,13 +7,15 @@
     <authors>tvn-cosine</authors>
     <owners>tvn-cosine</owners>
     <licenseUrl>https://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
-    <projectUrl>https://github.com/tvn-cosine/tvn-cosine/wiki/Tesseract-.net-Api</projectUrl> 
+    <projectUrl>https://github.com/tvn-cosine/tesseract.net/wiki</projectUrl> 
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <description>a .net wrapper for Tesseract Ocr.</description>
     <summary>a .net wrapper for Tesseract Ocr.</summary>
     <releaseNotes>These are breaking changes!  
                   Removed Process method from TessBaseApi and created an extension method {This should be seperate to ensure classes conform to Tesseract classes}.  
                   Updated the Tesseract dll to use release build.
+                  Updated to version 1.75 of leptonica.net.
+                  Updated to .net framework 1.7.1
                   </releaseNotes>
     <copyright>Copyright © tvn-cosine 2018</copyright>
     <tags>dotNet OCR tesseract</tags>
