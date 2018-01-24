@@ -76,6 +76,7 @@
     <Folder Include="lib\x86\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="CreateNuGetPackage.ps1" />
     <None Include="packages.config" />
     <None Include="tesseract.net.nuspec" />
   </ItemGroup>
