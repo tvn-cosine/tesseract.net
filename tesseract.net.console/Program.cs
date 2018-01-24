@@ -12,6 +12,12 @@ namespace tesseract.net.console
     {
         public static void Main(string[] args)
         {
+            TessBaseAPI tessBaseAPI = new TessBaseAPI();
+
+            System.Console.WriteLine("The current version is {0}", tessBaseAPI.GetVersion());
+
+            System.Console.WriteLine("Press any key to quit...");
+            System.Console.ReadKey();
         }
           
         static void example1()

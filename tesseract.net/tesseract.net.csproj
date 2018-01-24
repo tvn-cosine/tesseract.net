@@ -31,8 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="leptonica.net, Version=1.74.4.14, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\leptonica.net.1.74.4.14\lib\net452\leptonica.net.dll</HintPath>
+    <Reference Include="leptonica.net, Version=1.75.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\leptonica.net.1.75.0.1\lib\net471\leptonica.net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -78,8 +78,60 @@
     <None Include="tesseract.net.nuspec" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="lib\x64\pvt.cppan.demo.google.tesseract.libtesseract400.dll" />
-    <Content Include="lib\x86\pvt.cppan.demo.google.tesseract.libtesseract400.dll" />
+    <Content Include="lib\x64\pvt.cppan.demo.danbloomberg.leptonica-1.75.0.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="lib\x64\pvt.cppan.demo.google.tesseract.libtesseract400.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="lib\x64\pvt.cppan.demo.jpeg-9.2.0.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="lib\x64\pvt.cppan.demo.madler.zlib-1.2.11.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="lib\x64\pvt.cppan.demo.openjpeg.openjp2-2.3.0.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="lib\x64\pvt.cppan.demo.png-1.6.33.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="lib\x64\pvt.cppan.demo.tiff-4.0.9.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="lib\x64\pvt.cppan.demo.webp-0.6.0.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="lib\x64\pvt.cppan.demo.xz_utils.lzma-5.2.3.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="lib\x86\pvt.cppan.demo.danbloomberg.leptonica-1.75.0.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="lib\x86\pvt.cppan.demo.google.tesseract.libtesseract400.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="lib\x86\pvt.cppan.demo.jpeg-9.2.0.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="lib\x86\pvt.cppan.demo.madler.zlib-1.2.11.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="lib\x86\pvt.cppan.demo.openjpeg.openjp2-2.3.0.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="lib\x86\pvt.cppan.demo.png-1.6.33.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="lib\x86\pvt.cppan.demo.tiff-4.0.9.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="lib\x86\pvt.cppan.demo.webp-0.6.0.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="lib\x86\pvt.cppan.demo.xz_utils.lzma-5.2.3.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
