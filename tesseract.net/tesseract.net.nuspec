@@ -11,7 +11,10 @@
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <description>a .net wrapper for Tesseract Ocr.</description>
     <summary>a .net wrapper for Tesseract Ocr.</summary>
-    <releaseNotes>added the SetImage method to allow OpenCV mat data pointers.</releaseNotes>
+    <releaseNotes>These are breaking changes!  
+                  Removed Process method from TessBaseApi and created an extension method {This should be seperate to ensure classes conform to Tesseract classes}.  
+                  Updated the Tesseract dll to use release build.
+                  </releaseNotes>
     <copyright>Copyright © tvn-cosine 2018</copyright>
     <tags>dotNet OCR tesseract</tags>
     <dependencies> 
