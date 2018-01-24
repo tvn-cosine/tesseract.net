@@ -66,6 +66,7 @@
     <Compile Include="ResultRenderer.cs" />
     <Compile Include="TessBaseAPI.cs" />
     <Compile Include="Enums\TextlineOrder.cs" />
+    <Compile Include="TesseractObjectBase.cs" />
     <Compile Include="TextRenderer.cs" />
     <Compile Include="UnlvRenderer.cs" />
     <Compile Include="Enums\WritingDirection.cs" />

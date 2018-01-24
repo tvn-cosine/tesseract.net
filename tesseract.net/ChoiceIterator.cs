@@ -4,25 +4,20 @@ using Tesseract.Native;
 
 namespace Tesseract
 {
-    public class ChoiceIterator : IDisposable
-    {
-        internal readonly HandleRef handleRef;
-
-        #region Ctors
+    public class ChoiceIterator : TesseractObjectBase, IDisposable
+    {  
         internal ChoiceIterator(ResultIterator resultIterator)
-        {
-            handleRef = new HandleRef(this, Native.DllImports.TessResultIteratorGetChoiceIterator(resultIterator.handleRef));
-        }
-        #endregion
+            : base(Native.DllImports.TessResultIteratorGetChoiceIterator((HandleRef)resultIterator))
+        {  } 
 
         public float Confidence()
         {
-            return DllImports.TessChoiceIteratorConfidence(handleRef);
+            return DllImports.TessChoiceIteratorConfidence((HandleRef)this);
         }
 
         public string GetUTF8Text()
         {
-            IntPtr pointer = Native.DllImports.TessChoiceIteratorGetUTF8Text(handleRef);
+            IntPtr pointer = Native.DllImports.TessChoiceIteratorGetUTF8Text((HandleRef)this);
             if (IntPtr.Zero != pointer)
             {
                 string returnObject = Marshaling.PtrToStringUTF8(pointer);
@@ -37,15 +32,16 @@ namespace Tesseract
 
         public bool Next()
         {
-            return Native.DllImports.TessChoiceIteratorNext(handleRef) == 1 ? true : false;
+            return Native.DllImports.TessChoiceIteratorNext((HandleRef)this) == 1 ? true : false;
         }
 
         #region IDisposable Support
         public void Dispose()
         {
-            if (handleRef.Handle != null && handleRef.Handle != IntPtr.Zero)
+            HandleRef obj = (HandleRef)this;
+            if (obj.Handle != IntPtr.Zero)
             {
-                Native.DllImports.TessChoiceIteratorDelete(handleRef);
+                Native.DllImports.TessChoiceIteratorDelete(obj);
             }
         }
         #endregion

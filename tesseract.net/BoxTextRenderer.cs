@@ -6,9 +6,7 @@ namespace Tesseract
     public class BoxTextRenderer : ResultRenderer
     {
         public BoxTextRenderer(string fileName)
-        {
-            IntPtr pointer = Native.DllImports.TessBoxTextRendererCreate(fileName);
-            handleRef = new HandleRef(this, pointer);
-        }
+            : base(Native.DllImports.TessBoxTextRendererCreate(fileName))
+        { }
     }
 }

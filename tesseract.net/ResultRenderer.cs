@@ -3,31 +3,24 @@ using System.Runtime.InteropServices;
 
 namespace Tesseract
 {
-    public class ResultRenderer : IDisposable
+    public class ResultRenderer : TesseractObjectBase, IDisposable
     {
-        internal HandleRef handleRef;
-
-        public ResultRenderer()
+        public ResultRenderer(HandleRef handleRef)
+            : base(handleRef.Handle)
         { }
 
-        public ResultRenderer(HandleRef handleRef)
-        {
-            this.handleRef = handleRef;
-        }
-
         public ResultRenderer(IntPtr pointer)
-        {
-            this.handleRef = new HandleRef(this, pointer);
-        }
+            : base(pointer)
+        { }
 
         public int ImageNum()
         {
-            return Native.DllImports.TessResultRendererImageNum(handleRef);
+            return Native.DllImports.TessResultRendererImageNum((HandleRef)this);
         }
 
         public string Title()
         {
-            IntPtr pointer = Native.DllImports.TessResultRendererTitle(handleRef);
+            IntPtr pointer = Native.DllImports.TessResultRendererTitle((HandleRef)this);
             if (IntPtr.Zero != pointer)
             {
                 return Marshal.PtrToStringAnsi(pointer);
@@ -40,7 +33,7 @@ namespace Tesseract
 
         public string Extension()
         {
-            IntPtr pointer = Native.DllImports.TessResultRendererExtention(handleRef);
+            IntPtr pointer = Native.DllImports.TessResultRendererExtention((HandleRef)this);
             if (IntPtr.Zero != pointer)
             {
                 return Marshal.PtrToStringAnsi(pointer);
@@ -53,15 +46,15 @@ namespace Tesseract
 
         public void EndDocument()
         {
-            if (Native.DllImports.TessResultRendererEndDocument(handleRef) != 1)
+            if (Native.DllImports.TessResultRendererEndDocument((HandleRef)this) != 1)
             {
                 throw new Exception("EndDocument failed.");
             }
         }
 
-        public void AddImage(TessBaseAPI api)
+        public void AddImage(TessBaseAPI tessBaseApi)
         {
-            if (Native.DllImports.TessResultRendererAddImage(handleRef, api.handleRef) != 1)
+            if (Native.DllImports.TessResultRendererAddImage((HandleRef)this, (HandleRef)tessBaseApi) != 1)
             {
                 throw new Exception("AddImage failed.");
             }
@@ -69,7 +62,7 @@ namespace Tesseract
 
         public void BeginDocument(string title)
         {
-            if (Native.DllImports.TessResultRendererBeginDocument(handleRef, title) != 1)
+            if (Native.DllImports.TessResultRendererBeginDocument((HandleRef)this, title) != 1)
             {
                 throw new Exception("BeginDocument failed.");
             }
@@ -77,22 +70,24 @@ namespace Tesseract
 
         public ResultRenderer Next()
         {
-            var pointer = Native.DllImports.TessResultRendererNext(handleRef);
+            var pointer = Native.DllImports.TessResultRendererNext((HandleRef)this);
             return new ResultRenderer(new HandleRef(this, pointer));
         }
 
         public void Insert(ResultRenderer next)
         {
-            Native.DllImports.TessResultRendererInsert(handleRef, next.handleRef.Handle);
+            HandleRef obj = (HandleRef)next;
+            Native.DllImports.TessResultRendererInsert((HandleRef)this, obj.Handle);
         }
 
 
         #region IDisposable Support  
         public void Dispose()
         {
-            if (handleRef.Handle != null && handleRef.Handle != IntPtr.Zero)
+            HandleRef obj = (HandleRef)this;
+            if (obj.Handle != IntPtr.Zero)
             {
-                Native.DllImports.TessDeleteResultRenderer(handleRef.Handle);
+                Native.DllImports.TessDeleteResultRenderer(obj.Handle);
             }
         }
         #endregion 

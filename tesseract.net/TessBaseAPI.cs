@@ -13,21 +13,17 @@ namespace Tesseract
     /// class to hide the data types so that users of this class don't have to
     /// include any other Tesseract headers.
     /// </summary>
-    public class TessBaseAPI : IDisposable
+    public class TessBaseAPI : TesseractObjectBase, IDisposable
     {
         private readonly string dataPath;
         private readonly string language;
-
-        internal readonly HandleRef handleRef;
-
-        #region Ctors
-
+          
         private TessBaseAPI()
-        {
-            handleRef = new HandleRef(this, Native.DllImports.TessBaseAPICreate());
-        }
+            : base(Native.DllImports.TessBaseAPICreate())
+        { }
 
-        public TessBaseAPI(string dataPath, string language = "eng", OcrEngineMode oem = OcrEngineMode.DEFAULT,
+        public TessBaseAPI(string dataPath, string language = "eng", 
+            OcrEngineMode oem = OcrEngineMode.DEFAULT,
             PageSegmentationMode psm = PageSegmentationMode.AUTO_OSD)
             : this()
         {
@@ -50,11 +46,7 @@ namespace Tesseract
             this.dataPath = dataPath;
             this.language = language;
         }
-
-        #endregion Ctors
-
-        #region Tesseract Methods
-
+         
         /// <summary>
         ///  Returns the version identifier as a static string. Do not delete.
         /// </summary>
@@ -77,7 +69,7 @@ namespace Tesseract
         /// </summary>
         public void SetInputName(string value)
         {
-            Native.DllImports.TessBaseAPISetInputName(handleRef, value);
+            Native.DllImports.TessBaseAPISetInputName((HandleRef)this, value);
         }
 
         /// <summary>
@@ -89,7 +81,7 @@ namespace Tesseract
         /// </summary>
         public string GetInputName()
         {
-            IntPtr pointer = Native.DllImports.TessBaseAPIGetInputName(handleRef);
+            IntPtr pointer = Native.DllImports.TessBaseAPIGetInputName((HandleRef)this);
             if (pointer == null || pointer == IntPtr.Zero)
             {
                 return null;
@@ -104,7 +96,7 @@ namespace Tesseract
 
         public string GetDatapath()
         {
-            IntPtr pointer = Native.DllImports.TessBaseAPIGetDatapath(handleRef);
+            IntPtr pointer = Native.DllImports.TessBaseAPIGetDatapath((HandleRef)this);
             if (pointer == null || pointer == IntPtr.Zero)
             {
                 return null;
@@ -129,7 +121,7 @@ namespace Tesseract
             ClearPersistentCache();
             ClearAdaptiveClassifier();
 
-            Native.DllImports.TessBaseAPISetImage(handleRef, imagedata, width, height, bytes_per_pixel, bytes_per_line);
+            Native.DllImports.TessBaseAPISetImage((HandleRef)this, imagedata, width, height, bytes_per_pixel, bytes_per_line);
         }
 
         /// <summary>
@@ -141,7 +133,7 @@ namespace Tesseract
             ClearPersistentCache();
             ClearAdaptiveClassifier();
 
-            Native.DllImports.TessBaseAPISetImage2(handleRef, (HandleRef)value);
+            Native.DllImports.TessBaseAPISetImage2((HandleRef)this, (HandleRef)value);
         }
 
         /// <summary>
@@ -167,7 +159,7 @@ namespace Tesseract
         /// </summary>
         public Pix GetInputImage()
         {
-            IntPtr pointer = Native.DllImports.TessBaseAPIGetInputImage(handleRef);
+            IntPtr pointer = Native.DllImports.TessBaseAPIGetInputImage((HandleRef)this);
 
             if (IntPtr.Zero != pointer)
             {
@@ -182,7 +174,7 @@ namespace Tesseract
         /// </summary>
         public int GetSourceYResolution()
         {
-            return Native.DllImports.TessBaseAPIGetSourceYResolution(handleRef);
+            return Native.DllImports.TessBaseAPIGetSourceYResolution((HandleRef)this);
         }
 
         /// <summary>
@@ -190,7 +182,7 @@ namespace Tesseract
         /// </summary>
         public void SetOutputName(string name)
         {
-            Native.DllImports.TessBaseAPISetOutputName(handleRef, name);
+            Native.DllImports.TessBaseAPISetOutputName((HandleRef)this, name);
         }
 
         /// <summary>
@@ -209,12 +201,12 @@ namespace Tesseract
         /// <returns></returns>
         public bool SetVariable(string name, string value)
         {
-            return Native.DllImports.TessBaseAPISetVariable(handleRef, name, value) == 1 ? true : false;
+            return Native.DllImports.TessBaseAPISetVariable((HandleRef)this, name, value) == 1 ? true : false;
         }
 
         public bool SetDebugVariable(string name, string value)
         {
-            return Native.DllImports.TessBaseAPISetDebugVariable(handleRef, name, value) == 1 ? true : false;
+            return Native.DllImports.TessBaseAPISetDebugVariable((HandleRef)this, name, value) == 1 ? true : false;
         }
 
         /// <summary>
@@ -223,7 +215,7 @@ namespace Tesseract
         /// </summary>
         public bool GetIntVariable(string name, out int value)
         {
-            return Native.DllImports.TessBaseAPIGetIntVariable(handleRef, name, out value) == 1 ? true : false;
+            return Native.DllImports.TessBaseAPIGetIntVariable((HandleRef)this, name, out value) == 1 ? true : false;
         }
 
         /// <summary>
@@ -233,8 +225,7 @@ namespace Tesseract
         public bool GetBoolVariable(string name, out bool value)
         {
             //execute the dll import function.  it accepts int not bool
-            int tempValue;
-            var answer = Native.DllImports.TessBaseAPIGetBoolVariable(handleRef, name, out tempValue) == 1 ? true : false;
+            var answer = Native.DllImports.TessBaseAPIGetBoolVariable((HandleRef)this, name, out int tempValue) == 1 ? true : false;
             //cast the int to bool
             value = tempValue == 1 ? true : false;
             //return whether function succeeded
@@ -247,7 +238,7 @@ namespace Tesseract
         /// </summary>
         public bool GetDoubleVariable(string name, out double value)
         {
-            return Native.DllImports.TessBaseAPIGetDoubleVariable(handleRef, name, out value) == 1 ? true : false;
+            return Native.DllImports.TessBaseAPIGetDoubleVariable((HandleRef)this, name, out value) == 1 ? true : false;
         }
 
         /// <summary>
@@ -256,7 +247,7 @@ namespace Tesseract
         /// </summary>
         public string GetStringVariable(string name)
         {
-            IntPtr pointer = Native.DllImports.TessBaseAPIGetStringVariable(handleRef, name);
+            IntPtr pointer = Native.DllImports.TessBaseAPIGetStringVariable((HandleRef)this, name);
             if (pointer == null || pointer == IntPtr.Zero)
             {
                 return null;
@@ -316,7 +307,7 @@ namespace Tesseract
                 configsSize = configs.Length;
             }
 
-            return Native.DllImports.TessBaseAPIInit1(handleRef, dataPath, language, tessOcrEngineMode, configs, configsSize) == 0;
+            return Native.DllImports.TessBaseAPIInit1((HandleRef)this, dataPath, language, tessOcrEngineMode, configs, configsSize) == 0;
         }
 
         /// <summary>
@@ -360,7 +351,7 @@ namespace Tesseract
         /// </summary>
         public bool Init(string dataPath, string language, OcrEngineMode tessOcrEngineMode)
         {
-            return Native.DllImports.TessBaseAPIInit2(handleRef, dataPath, language, tessOcrEngineMode) == 0;
+            return Native.DllImports.TessBaseAPIInit2((HandleRef)this, dataPath, language, tessOcrEngineMode) == 0;
         }
 
         /// <summary>
@@ -404,7 +395,7 @@ namespace Tesseract
         /// </summary>
         public bool Init(string dataPath, string language)
         {
-            return Native.DllImports.TessBaseAPIInit3(handleRef, dataPath, language) == 0;
+            return Native.DllImports.TessBaseAPIInit3((HandleRef)this, dataPath, language) == 0;
         }
 
         /// <summary>
@@ -467,7 +458,7 @@ namespace Tesseract
                 varsValuesSize = new UIntPtr((uint)varsValues.Length);
             }
 
-            return Native.DllImports.TessBaseAPIInit4(handleRef, dataPath, language, tessOcrEngineMode,
+            return Native.DllImports.TessBaseAPIInit4((HandleRef)this, dataPath, language, tessOcrEngineMode,
                 configs, configsSize, varsVec, varsValues, varsVecSize, setOnlyNonDebugParams ? 1 : 0) == 0;
         }
 
@@ -481,7 +472,7 @@ namespace Tesseract
         /// </summary>
         public string GetInitLanguagesAsString()
         {
-            IntPtr pointer = Native.DllImports.TessBaseAPIGetInitLanguagesAsString(handleRef);
+            IntPtr pointer = Native.DllImports.TessBaseAPIGetInitLanguagesAsString((HandleRef)this);
             if (pointer == null || pointer == IntPtr.Zero)
             {
                 return null;
@@ -502,7 +493,7 @@ namespace Tesseract
         /// </summary>
         public int InitLangMod(string dataPath, string language)
         {
-            return Native.DllImports.TessBaseAPIInitLangMod(handleRef, dataPath, language);
+            return Native.DllImports.TessBaseAPIInitLangMod((HandleRef)this, dataPath, language);
         }
 
         /// <summary>
@@ -511,7 +502,7 @@ namespace Tesseract
         /// </summary>
         public void InitForAnalysePage()
         {
-            Native.DllImports.TessBaseAPIInitForAnalysePage(handleRef);
+            Native.DllImports.TessBaseAPIInitForAnalysePage((HandleRef)this);
         }
 
         /// <summary>
@@ -521,7 +512,7 @@ namespace Tesseract
         /// </summary>
         public void SetPageSegMode(PageSegmentationMode value)
         {
-            Native.DllImports.TessBaseAPISetPageSegMode(handleRef, value);
+            Native.DllImports.TessBaseAPISetPageSegMode((HandleRef)this, value);
         }
 
         /// <summary>
@@ -529,7 +520,7 @@ namespace Tesseract
         /// </summary>
         public PageSegmentationMode GetPageSegMode()
         {
-            return Native.DllImports.TessBaseAPIGetPageSegMode(handleRef);
+            return Native.DllImports.TessBaseAPIGetPageSegMode((HandleRef)this);
         }
 
         /// <summary>
@@ -538,7 +529,7 @@ namespace Tesseract
         /// </summary>
         public void ClearAdaptiveClassifier()
         {
-            Native.DllImports.TessBaseAPIClearAdaptiveClassifier(handleRef);
+            Native.DllImports.TessBaseAPIClearAdaptiveClassifier((HandleRef)this);
         }
 
         /// <summary>
@@ -547,7 +538,7 @@ namespace Tesseract
         /// </summary>
         public void SetSourceResolution(int ppi)
         {
-            Native.DllImports.TessBaseAPISetSourceResolution(handleRef, ppi);
+            Native.DllImports.TessBaseAPISetSourceResolution((HandleRef)this, ppi);
         }
 
         /// <summary>
@@ -557,7 +548,7 @@ namespace Tesseract
         /// </summary>
         public void SetRectangle(int left, int top, int width, int height)
         {
-            Native.DllImports.TessBaseAPISetRectangle(handleRef, left, top, width, height);
+            Native.DllImports.TessBaseAPISetRectangle((HandleRef)this, left, top, width, height);
         }
 
         /// <summary>
@@ -567,7 +558,7 @@ namespace Tesseract
         /// </summary>
         public Pix GetThresholdedImage()
         {
-            IntPtr pointer = Native.DllImports.TessBaseAPIGetThresholdedImage(handleRef);
+            IntPtr pointer = Native.DllImports.TessBaseAPIGetThresholdedImage((HandleRef)this);
 
             if (IntPtr.Zero != pointer)
             {
@@ -579,8 +570,7 @@ namespace Tesseract
 
         public Boxa GetRegions(out Pixa pixa)
         {
-            IntPtr pixaPnt;
-            IntPtr pointer = Native.DllImports.TessBaseAPIGetRegions(handleRef, out pixaPnt);
+            IntPtr pointer = Native.DllImports.TessBaseAPIGetRegions((HandleRef)this, out IntPtr pixaPnt);
 
             if (pixaPnt != IntPtr.Zero)
             {
@@ -601,8 +591,7 @@ namespace Tesseract
 
         public Boxa GetTextlines(out Pixa pixa, out int[] blockids)
         {
-            IntPtr pixaPnt;
-            IntPtr pointer = Native.DllImports.TessBaseAPIGetTextlines(handleRef, out pixaPnt, out blockids);
+            IntPtr pointer = Native.DllImports.TessBaseAPIGetTextlines((HandleRef)this, out IntPtr pixaPnt, out blockids);
 
             if (pixaPnt != IntPtr.Zero)
             {
@@ -623,8 +612,7 @@ namespace Tesseract
 
         public Boxa GetStrips(out Pixa pixa, out int[] blockids)
         {
-            IntPtr pixaPntr;
-            IntPtr pointer = Native.DllImports.TessBaseAPIGetStrips(handleRef, out pixaPntr, out blockids);
+            IntPtr pointer = Native.DllImports.TessBaseAPIGetStrips((HandleRef)this, out IntPtr pixaPntr, out blockids);
 
             if (pixaPntr != IntPtr.Zero)
             {
@@ -645,8 +633,7 @@ namespace Tesseract
 
         public Boxa GetTextlines(bool rawImage, int rawPadding, out Pixa pixa, out int[] blockids, out int[] paraids)
         {
-            IntPtr pixaPntr;
-            IntPtr pointer = Native.DllImports.TessBaseAPIGetTextlines1(handleRef, rawImage ? 1 : 0, rawPadding, out pixaPntr, out blockids, out paraids);
+            IntPtr pointer = Native.DllImports.TessBaseAPIGetTextlines1((HandleRef)this, rawImage ? 1 : 0, rawPadding, out IntPtr pixaPntr, out blockids, out paraids);
 
             if (pixaPntr != IntPtr.Zero)
             {
@@ -667,8 +654,7 @@ namespace Tesseract
 
         public Boxa GetWords(out Pixa pixa)
         {
-            IntPtr pixaPntr;
-            IntPtr pointer = Native.DllImports.TessBaseAPIGetWords(handleRef, out pixaPntr);
+            IntPtr pointer = Native.DllImports.TessBaseAPIGetWords((HandleRef)this, out IntPtr pixaPntr);
 
             if (pixaPntr != IntPtr.Zero)
             {
@@ -695,9 +681,9 @@ namespace Tesseract
             ////    TODO: Implement last two Pixa** pixa, int** blockids
             //// Pixa pixa;
             //// int[] blockids;
-            //// DllImports.TessBaseAPIGetComponentImages(handleRef, tessPageIteratorLevel, textOnly ? 1 : 0, out pixa, out blockids);
+            //// DllImports.TessBaseAPIGetComponentImages((HandleRef)this, tessPageIteratorLevel, textOnly ? 1 : 0, out pixa, out blockids);
 
-            IntPtr pointer = Native.DllImports.TessBaseAPIGetComponentImages(handleRef, tessPageIteratorLevel, textOnly ? 1 : 0, IntPtr.Zero, IntPtr.Zero);
+            IntPtr pointer = Native.DllImports.TessBaseAPIGetComponentImages((HandleRef)this, tessPageIteratorLevel, textOnly ? 1 : 0, IntPtr.Zero, IntPtr.Zero);
 
             if (IntPtr.Zero != pointer)
             {
@@ -715,7 +701,7 @@ namespace Tesseract
         /// </summary>
         public int GetThresholdedImageScaleFactor()
         {
-            return Native.DllImports.TessBaseAPIGetThresholdedImageScaleFactor(handleRef);
+            return Native.DllImports.TessBaseAPIGetThresholdedImageScaleFactor((HandleRef)this);
         }
 
         /// <summary>
@@ -725,7 +711,7 @@ namespace Tesseract
         /// </summary>
         public void DumpPGM(string fileName)
         {
-            Native.DllImports.TessBaseAPIDumpPGM(handleRef, fileName);
+            Native.DllImports.TessBaseAPIDumpPGM((HandleRef)this, fileName);
         }
 
         /// <summary>
@@ -745,7 +731,7 @@ namespace Tesseract
         /// </summary>
         public PageIterator AnalyseLayout()
         {
-            var pointer = Native.DllImports.TessBaseAPIAnalyseLayout(handleRef);
+            var pointer = Native.DllImports.TessBaseAPIAnalyseLayout((HandleRef)this);
             return new PageIterator(pointer);
         }
 
@@ -757,7 +743,7 @@ namespace Tesseract
         /// </summary>
         public int Recognize()
         {
-            return Native.DllImports.TessBaseAPIRecognize(handleRef, IntPtr.Zero); //TODO: Implement last parameter ETEXT_DESC*
+            return Native.DllImports.TessBaseAPIRecognize((HandleRef)this, IntPtr.Zero); //TODO: Implement last parameter ETEXT_DESC*
         }
 
         /// <summary>
@@ -766,7 +752,7 @@ namespace Tesseract
         /// <returns></returns>
         public int RecognizeForChopTest()
         {
-            return Native.DllImports.TessBaseAPIRecognizeForChopTest(handleRef, IntPtr.Zero); //TODO: Implement last parameter ETEXT_DESC*
+            return Native.DllImports.TessBaseAPIRecognizeForChopTest((HandleRef)this, IntPtr.Zero); //TODO: Implement last parameter ETEXT_DESC*
         }
 
         /// <summary>
@@ -818,7 +804,7 @@ namespace Tesseract
         /// </summary>
         public string GetUTF8Text()
         {
-            IntPtr pointer = Native.DllImports.TessBaseAPIGetUTF8Text(handleRef);
+            IntPtr pointer = Native.DllImports.TessBaseAPIGetUTF8Text((HandleRef)this);
             if (pointer == null || pointer == IntPtr.Zero)
             {
                 return null;
@@ -838,7 +824,7 @@ namespace Tesseract
         /// </summary>
         public string GetHOCRText(int pageNumber)
         {
-            IntPtr pointer = Native.DllImports.TessBaseAPIGetHOCRText(handleRef, pageNumber);
+            IntPtr pointer = Native.DllImports.TessBaseAPIGetHOCRText((HandleRef)this, pageNumber);
             if (pointer == null || pointer == IntPtr.Zero)
             {
                 return null;
@@ -862,7 +848,7 @@ namespace Tesseract
         /// <returns></returns>
         public string GetBoxText(int pageNumber)
         {
-            IntPtr pointer = Native.DllImports.TessBaseAPIGetBoxText(handleRef, pageNumber);
+            IntPtr pointer = Native.DllImports.TessBaseAPIGetBoxText((HandleRef)this, pageNumber);
             if (pointer == null || pointer == IntPtr.Zero)
             {
                 return null;
@@ -882,7 +868,7 @@ namespace Tesseract
         /// </summary>
         public string GetUNLVText()
         {
-            IntPtr pointer = Native.DllImports.TessBaseAPIGetUNLVText(handleRef);
+            IntPtr pointer = Native.DllImports.TessBaseAPIGetUNLVText((HandleRef)this);
             if (pointer == null || pointer == IntPtr.Zero)
             {
                 return null;
@@ -906,7 +892,7 @@ namespace Tesseract
         /// </summary>
         public bool DetectOrientationScript(out int orient_deg, out float orient_conf, out string script_name, out float script_conf)
         {
-            return Native.DllImports.TessBaseAPIDetectOrientationScript(handleRef, out orient_deg, out orient_conf, out script_name, out script_conf) == 1 ? true : false;
+            return Native.DllImports.TessBaseAPIDetectOrientationScript((HandleRef)this, out orient_deg, out orient_conf, out script_name, out script_conf) == 1 ? true : false;
         }
 
         /// <summary>
@@ -916,7 +902,7 @@ namespace Tesseract
         {
             get
             {
-                return Native.DllImports.TessBaseAPIMeanTextConf(handleRef);
+                return Native.DllImports.TessBaseAPIMeanTextConf((HandleRef)this);
             }
         }
 
@@ -928,7 +914,7 @@ namespace Tesseract
         /// </summary>
         public void Clear()
         {
-            Native.DllImports.TessBaseAPIClear(handleRef);
+            Native.DllImports.TessBaseAPIClear((HandleRef)this);
         }
 
         /// <summary>
@@ -939,7 +925,7 @@ namespace Tesseract
         /// </summary>
         public void End()
         {
-            Native.DllImports.TessBaseAPIEnd(handleRef);
+            Native.DllImports.TessBaseAPIEnd((HandleRef)this);
         }
 
         /// <summary>
@@ -951,7 +937,7 @@ namespace Tesseract
         /// </summary>
         public void ClearPersistentCache()
         {
-            Native.DllImports.TessBaseAPIClearPersistentCache(handleRef);
+            Native.DllImports.TessBaseAPIClearPersistentCache((HandleRef)this);
         }
 
         /// <summary>
@@ -962,7 +948,7 @@ namespace Tesseract
         /// </summary>
         public bool IsValidWord(string word)
         {
-            return Native.DllImports.TessBaseAPIIsValidWord(handleRef, word) != 0;
+            return Native.DllImports.TessBaseAPIIsValidWord((HandleRef)this, word) != 0;
         }
 
         /// <summary>
@@ -970,7 +956,7 @@ namespace Tesseract
         /// </summary>
         public bool GetTextDirection(string word, out int outOffset, out float outSlope)
         {
-            return Native.DllImports.TessBaseAPIGetTextDirection(handleRef, out outOffset, out outSlope) == 1 ? true : false;
+            return Native.DllImports.TessBaseAPIGetTextDirection((HandleRef)this, out outOffset, out outSlope) == 1 ? true : false;
         }
 
         /// <summary>
@@ -978,7 +964,7 @@ namespace Tesseract
         /// </summary>
         public string GetUnichar(int uniCharId)
         {
-            IntPtr pointer = Native.DllImports.TessBaseAPIGetUnichar(handleRef, uniCharId);
+            IntPtr pointer = Native.DllImports.TessBaseAPIGetUnichar((HandleRef)this, uniCharId);
             if (pointer == null || pointer == IntPtr.Zero)
             {
                 return null;
@@ -998,7 +984,7 @@ namespace Tesseract
         {
             get
             {
-                return Native.DllImports.TessBaseAPIOem(handleRef);
+                return Native.DllImports.TessBaseAPIOem((HandleRef)this);
             }
         }
 
@@ -1010,7 +996,7 @@ namespace Tesseract
         /// </summary>
         public void ReadConfigFile(string fileName)
         {
-            Native.DllImports.TessBaseAPIReadConfigFile(handleRef, fileName);
+            Native.DllImports.TessBaseAPIReadConfigFile((HandleRef)this, fileName);
         }
 
         /// <summary>
@@ -1018,17 +1004,14 @@ namespace Tesseract
         /// </summary>
         public void ReadDebugConfigFile(string fileName)
         {
-            Native.DllImports.TessBaseAPIReadDebugConfigFile(handleRef, fileName);
+            Native.DllImports.TessBaseAPIReadDebugConfigFile((HandleRef)this, fileName);
         }
 
         public void SetMinOrientationMargin(double margin)
         {
-            Native.DllImports.TessBaseAPISetMinOrientationMargin(handleRef, margin);
+            Native.DllImports.TessBaseAPISetMinOrientationMargin((HandleRef)this, margin);
         }
-
-
-        #endregion Tesseract Methods
-
+          
         #region IDisposable Support
 
         private bool disposedValue = false; // To detect redundant calls
@@ -1042,13 +1025,14 @@ namespace Tesseract
                     // TODO: dispose managed state (managed objects).
                 }
 
-                if (handleRef.Handle != null && handleRef.Handle != IntPtr.Zero)
+                HandleRef obj = (HandleRef)this;
+                if (obj.Handle != IntPtr.Zero)
                 {
                     Clear();
                     ClearAdaptiveClassifier();
                     End();
                     ClearPersistentCache();
-                    Native.DllImports.TessBaseAPIDelete(handleRef);
+                    Native.DllImports.TessBaseAPIDelete((HandleRef)this);
                 }
 
                 disposedValue = true;
