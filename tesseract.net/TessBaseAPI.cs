@@ -14,11 +14,8 @@ namespace Tesseract
     /// include any other Tesseract headers.
     /// </summary>
     public class TessBaseAPI : TesseractObjectBase, IDisposable
-    {
-        private readonly string dataPath;
-        private readonly string language;
-          
-        private TessBaseAPI()
+    { 
+        public TessBaseAPI()
             : base(Native.DllImports.TessBaseAPICreate())
         { }
 
@@ -40,11 +37,7 @@ namespace Tesseract
             }
 
             // Set the Page Segmentation mode
-            SetPageSegMode(psm);
-
-            // Set the local data path and language
-            this.dataPath = dataPath;
-            this.language = language;
+            SetPageSegMode(psm); 
         }
          
         /// <summary>
