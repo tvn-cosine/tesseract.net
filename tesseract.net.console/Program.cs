@@ -13,7 +13,7 @@ namespace tesseract.net.console
         public static void Main(string[] args)
         {
         }
-
+          
         static void example1()
         {
             string dataPath = "./tessdata/";

@@ -71,14 +71,15 @@
     <Compile Include="UnlvRenderer.cs" />
     <Compile Include="Enums\WritingDirection.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="lib\x64\" />
-    <Folder Include="lib\x86\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="CreateNuGetPackage.ps1" />
     <None Include="packages.config" />
     <None Include="tesseract.net.nuspec" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="lib\x64\pvt.cppan.demo.google.tesseract.libtesseract400.dll" />
+    <Content Include="lib\x86\pvt.cppan.demo.google.tesseract.libtesseract400.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
