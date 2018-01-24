@@ -1,6 +1,4 @@
-﻿using System.Runtime.InteropServices;
-
-namespace Tesseract
+﻿namespace Tesseract
 {
     public class TextRenderer : ResultRenderer
     {

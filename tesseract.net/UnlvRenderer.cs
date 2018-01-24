@@ -1,7 +1,4 @@
-﻿using System;
-using System.Runtime.InteropServices;
-
-namespace Tesseract
+﻿namespace Tesseract
 {
     public class UnlvRenderer : ResultRenderer
     {
