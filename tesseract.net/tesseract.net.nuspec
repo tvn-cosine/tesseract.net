@@ -17,7 +17,7 @@
       Renamed certain methods to conform to Tesseract naming
       Updated the Tesseract dll to use release build {@moriyac}.
       Updated to version 1.75 of leptonica.net.
-      Updated to .net framework 1.7.1
+      Updated to .net framework 4.5.2
       Implemented a TesseractObjectBase abstract class to handle HandleRefs
       Moved the source code to its own repository
       Changed project url to https://github.com/tvn-cosine/tesseract.net/wiki
