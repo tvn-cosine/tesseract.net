@@ -81,7 +81,7 @@ namespace Tesseract
             }
             else
             {
-                string returnObject = Marshal.PtrToStringAnsi(pointer);
+                string returnObject = Marshaling.PtrToStringUTF8(pointer);
                 Native.DllImports.TessDeleteText(pointer);
                 return returnObject;
             }
@@ -96,7 +96,7 @@ namespace Tesseract
             }
             else
             {
-                return Marshal.PtrToStringAnsi(pointer);
+                return Marshaling.PtrToStringUTF8(pointer);
             }
         }
 
@@ -824,7 +824,7 @@ namespace Tesseract
             }
             else
             {
-                string returnObject = Marshal.PtrToStringAnsi(pointer);
+                string returnObject = Marshaling.PtrToStringUTF8(pointer);
                 Native.DllImports.TessDeleteText(pointer); //Delete the text pointer to clear memory
                 return returnObject;
             }
@@ -848,7 +848,7 @@ namespace Tesseract
             }
             else
             {
-                string returnObject = Marshal.PtrToStringAnsi(pointer);
+                string returnObject = Marshaling.PtrToStringUTF8(pointer);
                 Native.DllImports.TessDeleteText(pointer); //Delete the text pointer to clear memory
                 return returnObject;
             }
@@ -868,7 +868,7 @@ namespace Tesseract
             }
             else
             {
-                string returnObject = Marshal.PtrToStringAnsi(pointer);
+                string returnObject = Marshaling.PtrToStringUTF8(pointer);
                 Native.DllImports.TessDeleteText(pointer); //Delete the text pointer to clear memory
                 return returnObject;
             }
