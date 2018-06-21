@@ -12,6 +12,8 @@
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,9 +32,39 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'net452|AnyCPU'">
+    <OutputPath>bin\net452\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'net462|AnyCPU'">
+    <OutputPath>bin\net462\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'net471|AnyCPU'">
+    <OutputPath>bin\net471\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="leptonica.net, Version=1.75.0.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\leptonica.net.1.75.0.2\lib\net452\leptonica.net.dll</HintPath>
+    <Reference Include="leptonica.net, Version=1.75.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\leptonica.net.1.75.0.3\lib\net452\leptonica.net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -75,31 +107,21 @@
   <ItemGroup>
     <None Include="CreateNuGetPackage.ps1" />
     <None Include="packages.config" />
-    <None Include="tesseract.net.nuspec" />
+    <None Include="tesseract.net.nuspec">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="tesseract.net.targets" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="lib\x64\pvt.cppan.demo.danbloomberg.leptonica-1.75.0.dll" />
-    <Content Include="lib\x64\pvt.cppan.demo.google.tesseract.libtesseract400.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <None Include="lib\x64\pvt.cppan.demo.jpeg-9.2.0.dll" />
-    <None Include="lib\x64\pvt.cppan.demo.madler.zlib-1.2.11.dll" />
-    <None Include="lib\x64\pvt.cppan.demo.openjpeg.openjp2-2.3.0.dll" />
-    <None Include="lib\x64\pvt.cppan.demo.png-1.6.33.dll" />
-    <None Include="lib\x64\pvt.cppan.demo.tiff-4.0.9.dll" />
-    <None Include="lib\x64\pvt.cppan.demo.webp-0.6.0.dll" />
-    <None Include="lib\x64\pvt.cppan.demo.xz_utils.lzma-5.2.3.dll" />
-    <None Include="lib\x86\pvt.cppan.demo.danbloomberg.leptonica-1.75.0.dll" />
-    <Content Include="lib\x86\pvt.cppan.demo.google.tesseract.libtesseract400.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <None Include="lib\x86\pvt.cppan.demo.jpeg-9.2.0.dll" />
-    <None Include="lib\x86\pvt.cppan.demo.madler.zlib-1.2.11.dll" />
-    <None Include="lib\x86\pvt.cppan.demo.openjpeg.openjp2-2.3.0.dll" />
-    <None Include="lib\x86\pvt.cppan.demo.png-1.6.33.dll" />
-    <None Include="lib\x86\pvt.cppan.demo.tiff-4.0.9.dll" />
-    <None Include="lib\x86\pvt.cppan.demo.webp-0.6.0.dll" />
-    <None Include="lib\x86\pvt.cppan.demo.xz_utils.lzma-5.2.3.dll" />
+    <Content Include="lib\x64\pvt.cppan.demo.google.tesseract.libtesseract400.dll" />
+    <Content Include="lib\x86\pvt.cppan.demo.google.tesseract.libtesseract400.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\leptonica.net.1.75.0.3\build\leptonica.net.targets" Condition="Exists('..\packages\leptonica.net.1.75.0.3\build\leptonica.net.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\leptonica.net.1.75.0.3\build\leptonica.net.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\leptonica.net.1.75.0.3\build\leptonica.net.targets'))" />
+  </Target>
 </Project>

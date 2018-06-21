@@ -12,16 +12,22 @@
     <description>a .net wrapper for Tesseract Ocr.</description>
     <summary>a .net wrapper for Tesseract Ocr.</summary>
     <releaseNotes>
-      Changed GetText methods to Marshaling.PtrToStringUTF8 - @maoleigepu
+      Added compiled dlls for higher frameworks.
+      Changed to use a tesseract.net target file to remove actual project dll includes.  This should resolve the issue where people forget to set copy to output directory to true.
+      Added pixReadFromMemoryStream(System.IO.Stream stream) @CSharpReaper -- Not tested
     </releaseNotes>
     <copyright>Copyright © tvn-cosine 2018</copyright>
     <tags>dotNet OCR tesseract</tags>
     <dependencies> 
-		<dependency id="leptonica.net" version="1.75.0.1" /> 
+		<dependency id="leptonica.net" version="1.75.0.3" /> 
 	</dependencies>
   </metadata>
   <files>
-    <file src="lib\x86\pvt.cppan.demo.google.tesseract.libtesseract400.dll" target="lib\x86\" />
-    <file src="lib\x64\pvt.cppan.demo.google.tesseract.libtesseract400.dll" target="lib\x64\" />
+    <file src="lib\x86\pvt.cppan.demo.google.tesseract.libtesseract400.dll" target="build\x86\" />
+    <file src="lib\x64\pvt.cppan.demo.google.tesseract.libtesseract400.dll" target="build\x64\" />
+    <file src="bin\net452\tesseract.net.dll" target="lib/net452/" />
+    <file src="bin\net462\tesseract.net.dll" target="lib/net462/" />
+    <file src="bin\net471\tesseract.net.dll" target="lib/net471/" />
+    <file src="leptonica.net.targets" target="build/" />
   </files>
 </package>
