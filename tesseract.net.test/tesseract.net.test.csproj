@@ -83,56 +83,6 @@
     <Compile Include="TessBaseAPITests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="lib\x64\pvt.cppan.demo.danbloomberg.leptonica-1.75.0.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="lib\x64\pvt.cppan.demo.jpeg-9.2.0.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="lib\x64\pvt.cppan.demo.madler.zlib-1.2.11.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="lib\x64\pvt.cppan.demo.openjpeg.openjp2-2.3.0.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="lib\x64\pvt.cppan.demo.png-1.6.33.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="lib\x64\pvt.cppan.demo.tiff-4.0.9.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="lib\x64\pvt.cppan.demo.webp-0.6.0.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="lib\x64\pvt.cppan.demo.xz_utils.lzma-5.2.3.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="lib\x86\pvt.cppan.demo.danbloomberg.leptonica-1.75.0.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="lib\x86\pvt.cppan.demo.jpeg-9.2.0.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="lib\x86\pvt.cppan.demo.madler.zlib-1.2.11.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="lib\x86\pvt.cppan.demo.openjpeg.openjp2-2.3.0.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="lib\x86\pvt.cppan.demo.png-1.6.33.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="lib\x86\pvt.cppan.demo.tiff-4.0.9.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="lib\x86\pvt.cppan.demo.webp-0.6.0.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="lib\x86\pvt.cppan.demo.xz_utils.lzma-5.2.3.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\tesseract.net\tesseract.net.csproj">
       <Project>{3220baf5-0d9c-4533-b372-1b1c4cf24aff}</Project>
       <Name>tesseract.net</Name>
@@ -140,6 +90,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="lib\x64\" />
+    <Folder Include="lib\x86\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
