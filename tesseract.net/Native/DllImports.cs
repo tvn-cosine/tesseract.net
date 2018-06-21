@@ -7,8 +7,8 @@ namespace Tesseract.Native
     internal class DllImports
     {
         private const string pattern = @"pvt.cppan.demo.";
-        private const string x64 = @"lib\x64";
-        private const string x86 = @"lib\x86";
+        private const string x64 = @"x64";
+        private const string x86 = @"x86";
         private const string tesseractDllName = "pvt.cppan.demo.google.tesseract.libtesseract400.dll";
 
         static DllImports()
