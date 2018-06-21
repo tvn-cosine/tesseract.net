@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0"?>
 <package >
-  <metadata>
+  <metadata minClientVersion="2.5">
     <id>tesseract.net</id>
     <title>tesseract.net</title>
     <version>$version$</version>
@@ -28,6 +28,6 @@
     <file src="bin\net452\tesseract.net.dll" target="lib/net452/" />
     <file src="bin\net462\tesseract.net.dll" target="lib/net462/" />
     <file src="bin\net471\tesseract.net.dll" target="lib/net471/" />
-    <file src="leptonica.net.targets" target="build/" />
+    <file src="tesseract.net.targets" target="build/" />
   </files>
 </package>
