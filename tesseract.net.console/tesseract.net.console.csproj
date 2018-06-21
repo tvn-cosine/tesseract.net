@@ -86,12 +86,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\tesseract.net\tesseract.net.csproj">
-      <Project>{3220BAF5-0D9C-4533-B372-1B1C4CF24AFF}</Project>
-      <Name>tesseract.net</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="lib\x64\" />
     <Folder Include="lib\x86\" />
   </ItemGroup>

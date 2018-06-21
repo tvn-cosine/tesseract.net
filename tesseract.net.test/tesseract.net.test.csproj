@@ -83,12 +83,6 @@
     <Compile Include="TessBaseAPITests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\tesseract.net\tesseract.net.csproj">
-      <Project>{3220baf5-0d9c-4533-b372-1b1c4cf24aff}</Project>
-      <Name>tesseract.net</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
