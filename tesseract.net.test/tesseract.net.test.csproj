@@ -77,6 +77,9 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="tesseract.net, Version=4.0.0.14, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\tesseract.net.4.0.0.14\lib\net452\tesseract.net.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -85,9 +88,10 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="lib\x64\" />
-    <Folder Include="lib\x86\" />
+    <Content Include="lib\x64\pvt.cppan.demo.google.tesseract.libtesseract400.dll" />
+    <Content Include="lib\x86\pvt.cppan.demo.google.tesseract.libtesseract400.dll" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
