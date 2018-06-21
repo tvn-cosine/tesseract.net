@@ -77,7 +77,7 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
     <Reference Include="tesseract.net, Version=4.0.0.14, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\tesseract.net.4.0.0.14\lib\net452\tesseract.net.dll</HintPath>
+      <HintPath>..\packages\tesseract.net.4.0.0.15\lib\net452\tesseract.net.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -96,5 +96,7 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\leptonica.net.1.75.0.3\build\leptonica.net.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\leptonica.net.1.75.0.3\build\leptonica.net.targets'))" />
+    <Error Condition="!Exists('..\packages\tesseract.net.4.0.0.15\build\tesseract.net.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\tesseract.net.4.0.0.15\build\tesseract.net.targets'))" />
   </Target>
+  <Import Project="..\packages\tesseract.net.4.0.0.15\build\tesseract.net.targets" Condition="Exists('..\packages\tesseract.net.4.0.0.15\build\tesseract.net.targets')" />
 </Project>
