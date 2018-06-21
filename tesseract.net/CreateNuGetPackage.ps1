@@ -72,7 +72,7 @@ Write-Host " "
 Write-Host "########"
 Write-Host "Packing nuget into $localDirectory." 
 Write-Host "Packing $localDirectory\$projectName\$projectName.csproj"
-& "C:\csource\nuget.exe" restore "$localDirectory$projectName.sln" 
+& "C:\csource\nuget.exe" restore "$localDirectory$projectName\$projectName.csproj"
 & $MSBuild "$localDirectory$projectName\$projectName.csproj" /p:Configuration=net452;
 & $MSBuild "$localDirectory$projectName\$projectName.csproj" /p:Configuration=net462;
 & $MSBuild "$localDirectory$projectName\$projectName.csproj" /p:Configuration=net471;
