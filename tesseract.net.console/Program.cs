@@ -12,6 +12,7 @@ namespace tesseract.net.console
     {
         public static void Main(string[] args)
         {
+            Tesseract.Native.DllImports.TesseractDirectory = @"C:\Test\tesseract";
             TessBaseAPI tessBaseAPI = new TessBaseAPI();
 
             System.Console.WriteLine("The current version is {0}", tessBaseAPI.GetVersion());

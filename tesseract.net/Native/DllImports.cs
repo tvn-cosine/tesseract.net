@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 
 namespace Tesseract.Native
 {
-    internal class DllImports
+    public class DllImports
     {
         private const string pattern = @"pvt.cppan.demo.";
         private const string x64 = @"x64";
@@ -13,29 +13,61 @@ namespace Tesseract.Native
 
         static DllImports()
         {
-            string directory = string.Format("{0}\\{1}", Environment.CurrentDirectory, x86);
-
-            if (Architecture.Is64BitProcess)
+            if (string.IsNullOrWhiteSpace(TesseractDirectory))
             {
-                directory = string.Format("{0}\\{1}", Environment.CurrentDirectory, x64);
+                TesseractDirectory = Environment.CurrentDirectory;
             }
+            CopyDlls();
+        }
 
-            foreach (string file in Directory.GetFiles(directory))
+        private static string tesseractDirectory;
+        public static string TesseractDirectory
+        {
+            get
             {
-                FileInfo fi = new FileInfo(file);
-                if (fi.Name.StartsWith(pattern)) // must copy
+                return tesseractDirectory;
+            }
+            set
+            {
+                if (value != tesseractDirectory)
                 {
-                    string newLocation = string.Format("{0}\\{1}",
-                                                Environment.CurrentDirectory,
-                                                fi.Name);
-                    if (!File.Exists(newLocation))
+                    if (Directory.Exists(value))
                     {
-                        File.Copy(file, newLocation, true);
+                        tesseractDirectory = value;
+                        CopyDlls();
                     }
                 }
             }
         }
 
+        public static void CopyDlls()
+        {
+            string directory = string.Format("{0}\\{1}", TesseractDirectory, x86);
+
+            if (Architecture.Is64BitProcess)
+            {
+                directory = string.Format("{0}\\{1}", TesseractDirectory, x64);
+            }
+
+            if (Directory.Exists(directory))
+            {
+                foreach (string file in Directory.GetFiles(directory))
+                {
+                    FileInfo fi = new FileInfo(file);
+                    if (fi.Name.StartsWith(pattern)) // must copy
+                    {
+                        string newLocation = string.Format("{0}\\{1}",
+                                                    Environment.CurrentDirectory,
+                                                    fi.Name);
+                        if (!File.Exists(newLocation))
+                        {
+                            File.Copy(file, newLocation, true);
+                        }
+                    }
+                }
+            }
+        }
+         
         // General free functions 
         [DllImport(tesseractDllName, CallingConvention = CallingConvention.Cdecl, EntryPoint = "TessVersion")]
         internal static extern IntPtr TessVersion();

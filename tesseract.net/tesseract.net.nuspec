@@ -12,14 +12,13 @@
     <description>a .net wrapper for Tesseract Ocr.</description>
     <summary>a .net wrapper for Tesseract Ocr.</summary>
     <releaseNotes>
-      Added compiled dlls for higher frameworks.
-      Changed to use a tesseract.net target file to remove actual project dll includes.  This should resolve the issue where people forget to set copy to output directory to true.
-      Added pixReadFromMemoryStream(System.IO.Stream stream) @CSharpReaper -- Not tested
+      Made Tesseract.Native.DllImports public -- NOT BEST OPTION BUT HEY
+      Added public static property TesseractDirectory in Tesseract.Native.DllImports so users can specify where dlls are located manually
     </releaseNotes>
     <copyright>Copyright © tvn-cosine 2018</copyright>
     <tags>dotNet OCR tesseract</tags>
     <dependencies> 
-		<dependency id="leptonica.net" version="1.75.0.3" /> 
+		<dependency id="leptonica.net" version="1.75.0.4" /> 
 	</dependencies>
   </metadata>
   <files>

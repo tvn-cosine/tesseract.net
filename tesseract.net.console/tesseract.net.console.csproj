@@ -65,8 +65,8 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="leptonica.net, Version=1.75.0.3, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\leptonica.net.1.75.0.3\lib\net452\leptonica.net.dll</HintPath>
+    <Reference Include="leptonica.net, Version=1.75.0.4, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\leptonica.net.1.75.0.4\lib\net452\leptonica.net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -76,9 +76,6 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="tesseract.net, Version=4.0.0.14, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\tesseract.net.4.0.0.15\lib\net452\tesseract.net.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
@@ -88,15 +85,18 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\tesseract.net\tesseract.net.csproj">
+      <Project>{3220baf5-0d9c-4533-b372-1b1c4cf24aff}</Project>
+      <Name>tesseract.net</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\packages\leptonica.net.1.75.0.3\build\leptonica.net.targets" Condition="Exists('..\packages\leptonica.net.1.75.0.3\build\leptonica.net.targets')" />
+  <Import Project="..\packages\leptonica.net.1.75.0.4\build\leptonica.net.targets" Condition="Exists('..\packages\leptonica.net.1.75.0.4\build\leptonica.net.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\leptonica.net.1.75.0.3\build\leptonica.net.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\leptonica.net.1.75.0.3\build\leptonica.net.targets'))" />
-    <Error Condition="!Exists('..\packages\tesseract.net.4.0.0.15\build\tesseract.net.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\tesseract.net.4.0.0.15\build\tesseract.net.targets'))" />
+    <Error Condition="!Exists('..\packages\leptonica.net.1.75.0.4\build\leptonica.net.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\leptonica.net.1.75.0.4\build\leptonica.net.targets'))" />
   </Target>
-  <Import Project="..\packages\tesseract.net.4.0.0.15\build\tesseract.net.targets" Condition="Exists('..\packages\tesseract.net.4.0.0.15\build\tesseract.net.targets')" />
 </Project>
