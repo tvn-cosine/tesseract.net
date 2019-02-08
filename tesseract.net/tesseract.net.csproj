@@ -63,8 +63,8 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="leptonica.net, Version=1.75.0.3, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\leptonica.net.1.75.0.3\lib\net452\leptonica.net.dll</HintPath>
+    <Reference Include="leptonica.net, Version=1.75.0.6, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\leptonica.net.1.75.0.6\lib\net452\leptonica.net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -117,11 +117,11 @@
     <None Include="lib\x86\pvt.cppan.demo.google.tesseract.libtesseract400.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\packages\leptonica.net.1.75.0.3\build\leptonica.net.targets" Condition="Exists('..\packages\leptonica.net.1.75.0.3\build\leptonica.net.targets')" />
+  <Import Project="..\packages\leptonica.net.1.75.0.6\build\leptonica.net.targets" Condition="Exists('..\packages\leptonica.net.1.75.0.6\build\leptonica.net.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\leptonica.net.1.75.0.3\build\leptonica.net.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\leptonica.net.1.75.0.3\build\leptonica.net.targets'))" />
+    <Error Condition="!Exists('..\packages\leptonica.net.1.75.0.6\build\leptonica.net.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\leptonica.net.1.75.0.6\build\leptonica.net.targets'))" />
   </Target>
 </Project>
